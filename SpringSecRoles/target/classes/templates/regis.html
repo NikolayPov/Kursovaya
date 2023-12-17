@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+  <title>AUTH</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
+  <style>
+    body {
+      background-image: url('https://klike.net/uploads/posts/2022-10/1666507271_3-63.jpg');
+      background-size: cover;
+      background-position: center center;
+      background-attachment: fixed;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    form {
+      background-color: rgba(255, 255, 255, 0.8); /* Прозрачный белый фон формы */
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+  </style>
+</head>
+<body>
+<div th:if="${message}" style="text-align: center;">
+  Пользователь уже существует
+</div>
+<form th:action="@{/registration}" method="post">
+  <div style="text-align: center;">
+    <div><label> Логин : <input type="text" name="username"/> </label></div>
+    <div><label> Пароль : <input type="password" name="password"/> </label></div>
+    <div><input type="submit" value="Регистрация"/></div>
+  </div>
+</form>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<style>
+    .body {
+        background: #808080;
+        color: #fff;
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+    }
+</style>
+<body class="body">
+
+<h2>Update typeofcar</h2>
+<div class="row">
+    <div>
+        <form action="#" th:action="@{/updatetypeofcar/{id}(id=${typeofcar.getId()})}" th:object="${typeofcar}" method="post">
+            <div class="row">
+                <div>
+                    <label for="typename" >Typename</label>
+                    <input type="text" th:field="*{typename}"  id="typename" placeholder="Typename">
+                    <span th:if="${#fields.hasErrors('typename')}" th:errors="*{typename}" ></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mt-5">
+                    <input class="btn btn-outline-warning" type="submit"  value="Update typeofcar">
+                </div>
+            </div>
+        </form>
+        <form method="get" action="/">
+            <input type="submit" value="На главную">
+        </form>
+    </div>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+</body>
+</html>

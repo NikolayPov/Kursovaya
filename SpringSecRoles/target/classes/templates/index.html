@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/css/list.css}" rel="stylesheet" />
+</head>
+<body class="body">
+<div th:insert="blocks/header"></div>
+
+
+
+
+<div th:switch="${orders}" class="container my-5"  >
+    <div class="row">
+        <div class="col-md-6">
+
+            <div th:case="*">
+                <h2 class="my-5" >Заказ</h2>
+                <table border="1" class="table table-danger">
+                    <thead>
+                    <tr>
+                        <th>Дата</th>
+                        <th>Время</th>
+                        <th>Продкут</th>
+                        <th>Срочность</th>
+                        <th>Услуга</th>
+                        <th>Стадия выполнения</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="orders : ${orderss}">
+                        <td th:text="${orders.getRegistrationdate()}"></td>
+                        <td th:text="${orders.getOrdertime()}"></td>
+                        <td th:text="${orders.getProduct().getProductname()}"></td>
+                        <td th:text="${orders.getCar().getSorh()}"></td>
+                        <td th:text="${orders.getService().getName_service()}"></td>
+                        <td th:text="${orders.getExecutionstage().getNameexecutionstage()}"></td>
+                        <td><a  class="btn btn-outline-warning"th:href="@{/editorders/{id}(id=${orders.getId()})}">Изминить</a></td>
+                        <td><a  class="btn btn-outline-danger" th:href="@{/deleteorders/{id}(id=${orders.getId()})}">Удалить</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="my-5"><a class="btn btn-success" href="/neworders">Новый заказ</a></p>
+        </div>
+    </div>
+</div>
+
+<div th:switch="${product}" class="container my-5">
+    <div class="row">
+        <div class="col-md-6">
+
+            <div th:case="*">
+                <h2 class="my-5">Продукт</h2>
+                <table border="1" class="table table-danger">
+                    <thead>
+                    <tr>
+                        <th>Навзание</th>
+                        <th>Цена</th>
+                        <th>Количесва</th>
+                        <th>Модель</th>
+                        <th>Бренд</th>
+                        <th>Производитель</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="product : ${products}">
+                        <td th:text="${product.getProductname()}"></td>
+                        <td th:text="${product.getProductprice()}"></td>
+                        <td th:text="${product.getQuantity()}"></td>
+                        <td th:text="${product.getCarmodel().getModelname()}"></td>
+                        <td th:text="${product.getCarBrand().getBrandname()}"></td>
+                        <td th:text="${product.getManufacturer().getCompany_name()}"></td>
+                        <td><a class="btn btn-outline-warning" th:href="@{/editproduct/{id}(id=${product.getId()})}">Изменить</a></td>
+                        <td><a class="btn btn-outline-danger" th:href="@{/deleteproduct/{id}(id=${product.getId()})}">Удалить</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="my-5"><a class="btn btn-success" href="/newproduct">Новый продукт</a></p>
+            <form th:method="POST" th:action="@{/search}">
+                <label for="searchstr">Enter name service</label>
+                <input type="text" id="searchstr" name="searchstr">
+                <input type="submit" value="Search">
+            </form>
+        </div>
+    </div>
+</div>
+<div th:switch="${executionstage}" class="container my-5">
+    <div class="row">
+        <div class="col-md-6">
+
+            <div th:case="*">
+                <h2 class="my-5">Стадия выполнения</h2>
+                <table border="1"  class="table table-danger">
+                    <thead>
+                    <tr>
+                        <th>Название</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="executionstage : ${executionstages}">
+                        <td th:text="${executionstage.getNameexecutionstage()}"></td>
+                        <td><a class="btn btn-outline-warning" th:href="@{/editexecutionstage/{id}(id=${executionstage.getId()})}">EDIT</a></td>
+                        <td><a class="btn btn-outline-danger" th:href="@{/deleteexecutionstage/{id}(id=${executionstage.getId()})}">DELETE</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="my-5"><a class="btn btn-success" href="/newexecutionstage">Добавить новую услугу</a></p>
+        </div>
+    </div>
+</div>
+<div th:switch="${carcategory}" class="container my-5">
+    <div class="row">
+        <div class="col-md-6">
+
+            <div th:case="*">
+                <h2 class="my-5">Категория автомобиля </h2>
+                <table border="1"  class="table table-danger">
+                    <thead>
+                    <tr>
+                        <th>Название</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="carcategory : ${carcategorys}">
+                        <td th:text="${carcategory.getCategoryname()}"></td>
+                        <td><a class="btn btn-outline-warning" th:href="@{/editcarcategory/{id}(id=${carcategory.getId()})}">EDIT</a></td>
+                        <td><a class="btn btn-outline-danger" th:href="@{/deletecarcategory/{id}(id=${carcategory.getId()})}">DELETE</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="my-5"><a class="btn btn-success" href="/newcarcategory">Добавить категория автомобиля</a></p>
+        </div>
+    </div>
+</div>
+<div th:switch="${typeofcar}" class="container my-5">
+    <div class="row">
+        <div class="col-md-6">
+
+            <div th:case="*">
+                <h2 class="my-5">Тип автомобиля</h2>
+                <table border="1" class="table table-danger">
+                    <thead>
+                    <tr>
+                        <th>Название</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="typeofcar : ${typeofcars}">
+                        <td th:text="${typeofcar.getTypename()}"></td>
+                        <td><a class="btn btn-outline-warning" th:href="@{/edittypeofcar/{id}(id=${typeofcar.getId()})}">EDIT</a></td>
+                        <td><a class="btn btn-outline-danger" th:href="@{/deletetypeofcar/{id}(id=${typeofcar.getId()})}">DELETE</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="my-5"><a class="btn btn-success" href="/newtypeofcar">Добавить тип автомобиля</a></p>
+        </div>
+    </div>
+</div>
+<div th:switch="${carbred}" class="container my-5">
+    <div class="row">
+        <div class="col-md-6">
+
+            <div th:case="*">
+                <h2 class="my-5">Бренд</h2>
+                <table border="1"  class="table table-danger">
+                    <thead>
+                    <tr>
+                        <th>Нзвание</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="carbred : ${carbrends}">
+                        <td th:text="${carbred.getBrandname()}"></td>
+                        <td><a class="btn btn-outline-warning" th:href="@{/editcarbrend/{id}(id=${carbred.getId()})}">EDIT</a></td>
+                        <td><a class="btn btn-outline-danger" th:href="@{/deletecarbrend/{id}(id=${carbred.getId()})}">DELETE</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="my-5"><a class="btn btn-success" href="/newcarbrend">Добавить бренд</a></p>
+        </div>
+    </div>
+</div>
+<div th:switch="${carmodel}" class="container my-5">
+    <div class="row">
+        <div class="col-md-6">
+
+            <div th:case="*">
+                <h2 class="my-5">Модель</h2>
+                <table border="1"  class="table table-danger">
+                    <thead>
+                    <tr>
+                        <th>Название</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="carmodel : ${carmodels}">
+                        <td th:text="${carmodel.getModelname()}"></td>
+                        <td><a class="btn btn-outline-warning" th:href="@{/editcarmodel/{id}(id=${carmodel.getId()})}">EDIT</a></td>
+                        <td><a class="btn btn-outline-danger" th:href="@{/deletecarmodel/{id}(id=${carmodel.getId()})}">DELETE</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="my-5"><a class="btn btn-success" href="/newcarmodel">Добавить модель</a></p>
+        </div>
+    </div>
+</div>
+<div th:switch="${manufacturer}" class="container my-5">
+    <div class="row">
+        <div class="col-md-6">
+
+            <div th:case="*">
+                <h2 class="my-5">Производитель</h2>
+                <table border="1"  class="table table-danger">
+                    <thead>
+                    <tr>
+                        <th>Название компании</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="manufacturer : ${manufacturers}">
+                        <td th:text="${manufacturer.getCompany_name()}"></td>
+                        <td><a class="btn btn-outline-warning" th:href="@{/editmanufacturer/{id}(id=${manufacturer.getId()})}">EDIT</a></td>
+                        <td><a class="btn btn-outline-danger" th:href="@{/deletemanufacturer/{id}(id=${manufacturer.getId()})}">DELETE</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="my-5"><a class="btn btn-success" href="/newmanufacturer">Добавить произвадителя</a></p>
+        </div>
+    </div>
+</div>
+<div th:switch="${service}" class="container my-5">
+    <div class="row">
+        <div class="col-md-6">
+
+            <div th:case="*">
+                <h2 class="my-5">Услуги</h2>
+                <table border="1"    class="table table-danger">
+                    <thead>
+                    <tr>
+                        <th>Название</th>
+                        <th>Цена</th>
+                        <th>Описание услуги</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="service : ${services}">
+                        <td th:text="${service.getName_service()}"></td>
+                        <td th:text="${service.getService_price()}"></td>
+                        <td th:text="${service.getDescription_service()}"></td>
+                        <td><a class="btn btn-outline-warning" th:href="@{/edit/{id}(id=${service.getId()})}">EDIT</a></td>
+                        <td><a class="btn btn-outline-danger" th:href="@{/delete/{id}(id=${service.getId()})}">DELETE</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="my-5"><a class="btn btn-success" href="/new">Добавить услугу</a></p>
+
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+</body>
+</html>
+
+

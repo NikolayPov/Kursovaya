@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<style>
+  .body {
+    background: #808080;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+  }
+</style>
+<body class="body">
+<div>
+  <h2>New Service</h2>
+  <div>
+    <div>
+      <form action="#" th:action="@{/addtechnicalpassport}" th:object="${technicalpassport}" method="post">
+        <div class="row">
+          <div >
+            <label for="number">Number</label>
+            <input type="text" th:field="*{number}" id="number" placeholder="Number">
+            <span th:if="${#fields.hasErrors('number')}" th:errors="*{number}" ></span>
+          </div>
+          <div >
+            <label for="yearofrelease" class="col-form-label">Yearofrelease</label>
+            <input type="text" th:field="*{yearofrelease}"  id="yearofrelease" placeholder="Yearofrelease">
+            <span th:if="${#fields.hasErrors('yearofrelease')}" th:errors="*{yearofrelease}" ></span>
+          </div>
+          <div >
+            <label for="registrationmark" class="col-form-label">Registrationmark</label>
+            <input type="text" th:field="*{registrationmark}"  id="registrationmark" placeholder="Registrationmark">
+            <span th:if="${#fields.hasErrors('registrationmark')}" th:errors="*{registrationmark}" ></span>
+          </div>
+        </div>
+
+        <div>
+          <select name="carcategory_id">
+            <option th:each="el : ${carcategorys}" th:value="${el.getId()}" th:text="${el.getCategoryname()}"></option>
+          </select>
+          <span th:if="${#fields.hasErrors('carcategory')}" th:errors="*{carcategory}" ></span>
+        </div>
+        <div>
+          <select name="typeofcar_id">
+            <option th:each="el : ${typeofcars}" th:value="${el.getId()}" th:text="${el.getTypename()}"></option>
+          </select>
+          <span th:if="${#fields.hasErrors('typeofcar')}" th:errors="*{typeofcar}" ></span>
+        </div>
+        <div>
+          <select name="carmodel_id">
+            <option th:each="el : ${carmodels}" th:value="${el.getId()}" th:text="${el.getModelname()}"></option>
+          </select>
+          <span th:if="${#fields.hasErrors('carmodel')}" th:errors="*{carmodel}" ></span>
+        </div>
+        <div>
+          <select name="carbrend_id">
+            <option th:each="el : ${carbrends}" th:value="${el.getId()}" th:text="${el.getBrandname()}"></option>
+          </select>
+
+        </div>
+        <div class="row">
+          <div >
+            <input class="btn btn-outline-success" type="submit"  value="Add Service">
+          </div>
+        </div>
+      </form>
+      <form method="get" action="/">
+        <input type="submit" value="На главную">
+      </form>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+</body>
+</html>
